@@ -1,0 +1,692 @@
+:root {
+    /* Chuẩn màu sắc của từng đội (Hex Codes) do User cung cấp */
+    --color-pistis: #3b82f6; /* Xanh Dương (Blue) - Đức Tin */
+    --color-elpis:  #22c55e; /* Xanh Lá (Green) - Đức Cậy */
+    --color-agape:  #ef4444; /* Đỏ/Hồng (Red/Pink) - Đức Mến */
+    
+    /* System Colors theo hướng tối hiện đại (Dark Modern) */
+    --bg-deep: #09090b; /* Zinc 950 */
+    --bg-card: rgba(24, 24, 27, 0.6); /* Zinc 900 ngả trong suốt */
+    --border-card: rgba(255, 255, 255, 0.08);
+    --text-main: #fafafa;
+    --text-muted: #a1a1aa;
+    
+    /* Variables for Box-Shadow Glows (Sẽ được gọi tự động) */
+    --glow-pistis: rgba(59, 130, 246, 0.4);
+    --glow-elpis: rgba(34, 197, 94, 0.4);
+    --glow-agape: rgba(239, 68, 68, 0.4);
+}
+
+/* =========================================
+   SMOOTH SCROLLING (ONE-PAGE NAVIGATION)
+   ========================================= */
+html {
+    scroll-behavior: smooth;
+    /* Đẩy điểm dừng cuộn xuống để nội dung không bị Navbar che khuất */
+    scroll-padding-top: 100px;
+}
+
+/* =========================================
+   RESET & THIẾT LẬP CƠ BẢN 
+   ========================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-main);
+    background: radial-gradient(circle at 50% -20%, #181926, var(--bg-deep) 80%);
+    min-height: 100vh;
+    padding: 0 1.5rem 3rem 1.5rem; /* Bỏ padding-top vì Navbar sticky đã giữ khoảng cách */
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Background trang trí chìm cho huyền ảo */
+.particles-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 85% 30%, rgba(239, 68, 68, 0.04) 0%, transparent 50%);
+}
+
+/* =========================================
+   HEADER CHÍNH 
+   ========================================= */
+.header {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.header h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    /* Hiệu ứng Text chuyển màu (Gradient) */
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 10px 30px rgba(255,255,255,0.1);
+    letter-spacing: -1px;
+}
+
+.header p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+/* =========================================
+   GRID LAYOUT (LƯỚI MOBILE/DESKTOP)
+   ========================================= */
+.tree-container {
+    display: grid;
+    /* Responsive: Tự chia cột, min=320px thì bung fulll 100%, nếu đủ chỗ thì tạo thành 3 cột */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    max-width: 1280px; /* Giữ layout cân đối trên màn to */
+    margin: 0 auto;
+}
+
+/* =========================================
+   THẺ TEAM (TEAM CARD) - GAMIFICATION
+   ========================================= */
+.team-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    position: relative;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
+}
+
+/* Vạch màu định danh trên cùng của mỗi thẻ */
+.team-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 8px;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    transition: background 0.3s ease;
+}
+
+/* Gán màu cho từng card */
+.team-pistis::before { background: var(--color-pistis); }
+.team-elpis::before { background: var(--color-elpis); }
+.team-agape::before { background: var(--color-agape); }
+
+/* Hiệu ứng Glow/Shadow xịn sò khi đội đạt TOP 1 */
+.team-pistis.top-1 { box-shadow: 0 0 40px var(--glow-pistis), inset 0 0 20px rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.3); }
+.team-elpis.top-1 { box-shadow: 0 0 40px var(--glow-elpis), inset 0 0 20px rgba(34,197,94,0.1); border-color: rgba(34,197,94,0.3); }
+.team-agape.top-1 { box-shadow: 0 0 40px var(--glow-agape), inset 0 0 20px rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.3); }
+
+/* Chữ Đội (Team Name) */
+.team-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Đổ màu chữ và bóng chữ (Aesthetic Shadow) */
+.team-pistis .team-name { color: var(--color-pistis); text-shadow: 0 0 15px var(--glow-pistis); }
+.team-elpis .team-name { color: var(--color-elpis); text-shadow: 0 0 15px var(--glow-elpis); }
+.team-agape .team-name { color: var(--color-agape); text-shadow: 0 0 15px var(--glow-agape); }
+
+
+/* =========================================
+   CÂY VÀ LÁ (CORE LOGIC VISUALS)
+   ========================================= */
+.tree-wrapper {
+    width: 260px;
+    /* Tỉ lệ bám theo đúng kích thước ảnh Designer xuất (2480x3508px) 
+       để Bounding Box lá khớp chính xác vùng tán cây */
+    aspect-ratio: 2480 / 3508;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Đảm bảo gốc cây luôn bám đất */
+    margin-bottom: 3rem;
+    cursor: pointer;
+    /* Hiệu ứng mượt cho khung cây */
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Hover/Touch tương tác (Theo TDD) */
+.tree-wrapper:hover {
+    transform: scale(1.05) rotate(2deg);
+}
+
+.base-tree {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom center; /* Neo chặt gốc cây vào phía dưới */
+    z-index: 2;
+    transition: filter 0.3s ease;
+}
+
+/* Lá tự sinh động (Dynamic Leaf) */
+.leaf {
+    position: absolute;
+    /* Các giá trị top, left, var(--rot), var(--scaleX) sẽ được JS bơm vào */
+    top: var(--top);
+    left: var(--left);
+    width: 32px;
+    height: auto;
+    z-index: 3;
+    pointer-events: none; /* Không cản chuột */
+    transform: translate(-50%, -50%) rotate(var(--rot)) scaleX(var(--scaleX));
+    /* Drop shadow làm lá nổi bật khỏi cây */
+    filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.4));
+}
+
+/* Class kích hoạt animation mọc mầm khi số thay đổi mạnh */
+.leaf.animate-grow {
+    animation: growLeaf 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes growLeaf {
+    0% { transform: translate(-50%, -50%) rotate(var(--rot)) scaleX(var(--scaleX)) scale(0); opacity: 0; }
+    40% { transform: translate(-50%, -50%) rotate(var(--rot)) scaleX(var(--scaleX)) scale(1.3); opacity: 0.9; }
+    100% { transform: translate(-50%, -50%) rotate(var(--rot)) scaleX(var(--scaleX)) scale(1); opacity: 1; }
+}
+
+/* Vương miện (Crown) Tôn vinh Top 1 */
+.crown {
+    position: absolute;
+    top: -45px;
+    font-size: 3.5rem;
+    z-index: 10;
+    /* Animation nảy & lấp lánh (bounce sparkle) */
+    animation: bounceSparkle 2s infinite ease-in-out;
+    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
+}
+
+@keyframes bounceSparkle {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-12px) scale(1.1); }
+}
+
+/* =========================================
+   THANH TIẾN TRÌNH (PROGRESS BAR)
+   ========================================= */
+.progress-section {
+    width: 100%;
+    margin-bottom: 2.5rem;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+}
+
+.team-label {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.video-count {
+    color: var(--text-main);
+}
+.video-count strong {
+    font-size: 1.2rem;
+    font-family: 'Outfit', sans-serif;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 14px;
+    background: rgba(255, 255, 255, 0.05); /* Track nền mờ */
+    border-radius: 100px; /* Bo tròn hoàn toàn */
+    position: relative;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); /* Bóng đổ chìm */
+}
+
+/* Thanh Fill Progress chạy bằng Percentage */
+.progress-bar {
+    height: 100%;
+    border-radius: 100px;
+    width: 0%; /* Default, JS sẽ ghi đè thuộc tính này */
+    transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Push the glow tip to the end */
+}
+
+/* Gradient đặc biệt & Bóng dạ quang cho từng đội */
+.team-pistis .progress-bar { background: linear-gradient(90deg, #1d4ed8, var(--color-pistis)); box-shadow: 0 0 12px var(--glow-pistis); }
+.team-elpis .progress-bar { background: linear-gradient(90deg, #15803d, var(--color-elpis)); box-shadow: 0 0 12px var(--glow-elpis); }
+.team-agape .progress-bar { background: linear-gradient(90deg, #b91c1c, var(--color-agape)); box-shadow: 0 0 12px var(--glow-agape); }
+
+.glow-tip {
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    margin-right: 2px;
+    box-shadow: 0 0 10px #fff;
+    opacity: 0.8;
+}
+
+/* Các vạch cột mốc (Markers) - milestones của Confetti */
+.marker {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: rgba(255,255,255,0.2);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Số mốc ở dưới vạch chia nhỏ */
+.marker span {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.4);
+    font-family: 'Outfit', sans-serif;
+}
+
+/* Highlight điểm mốc cuối cùng (30) */
+.marker[style*="100%"] span {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* =========================================
+   KIM CHỈ NAM VIDEO (TIKTOK EMBED SECTION)
+   ========================================= */
+.video-embed {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+}
+
+.video-embed h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Khung chứa Iframe Tiktok (Hoặc Placeholder nếu chưa nhúng) */
+.placeholder-embed {
+    min-height: 200px;
+    border: 1.5px dashed rgba(255,255,255,0.15);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.3);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    padding: 1rem;
+    background: rgba(255,255,255,0.02);
+}
+
+/* Reset iframe của Tiktok nếu được nhúng vào (để chiếm vừa khung) */
+.placeholder-embed iframe,
+.placeholder-embed blockquote {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    border-radius: 12px;
+}
+
+/* Lớp bảo vệ cha: dù Admin lỡ xóa mất .placeholder-embed 
+   thì iframe dán thẳng vào .video-embed vẫn an toàn trong khung */
+.video-embed iframe,
+.video-embed blockquote {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* =========================================
+   NAVBAR DÍNH (STICKY GLASSMORPHISM)
+   ========================================= */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 2rem;
+    background: rgba(24, 24, 27, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    /* Bóng đổ mềm mại phía dưới Navbar */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* [TRÁI] Tên chiến dịch */
+.nav-left {
+    flex-shrink: 0;
+}
+
+.nav-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, var(--color-pistis), var(--color-elpis), var(--color-agape));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* [GIỮA] Navigation Links */
+.nav-center {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    transition: color 0.3s ease, background 0.3s ease;
+    white-space: nowrap;
+}
+
+.nav-link:hover {
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* [PHẢI] Branding (Logo + Text) */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.nav-logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.brand-text span:first-child {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-main);
+    line-height: 1.3;
+}
+
+.brand-text span:last-child {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.3;
+}
+
+/* =========================================
+   CAMPAIGN SECTIONS (Bố cục chung)
+   ========================================= */
+.campaign-section {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 3rem 0;
+}
+
+/* Heading & Subheading chung cho các section mới */
+.section-heading {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 0.8rem;
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+}
+
+.section-subheading {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    margin-bottom: 3rem;
+    font-weight: 400;
+}
+
+/* =========================================
+   SECTION GIỚI THIỆU (INTRO HORIZONTAL CARDS)
+   ========================================= */
+.intro-section {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.intro-cards-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.intro-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 20px;
+    padding: 2rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.intro-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Viền trái màu sắc nhóm */
+.intro-card-pistis { border-left: 4px solid var(--color-pistis); }
+.intro-card-elpis  { border-left: 4px solid var(--color-elpis); }
+.intro-card-agape  { border-left: 4px solid var(--color-agape); }
+
+/* Khu vực ảnh (1/3 chiều rộng) */
+.intro-card-image {
+    flex: 0 0 30%;
+    max-width: 200px;
+}
+
+.intro-card-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    object-fit: contain;
+    /* Bóng mềm để ảnh cây nổi bật */
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+}
+
+/* Khu vực nội dung (2/3 chiều rộng) */
+.intro-card-content {
+    flex: 1;
+}
+
+.intro-card-content h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+/* Badge nhỏ "Đức Tin" / "Đức Cậy" / "Đức Mến" */
+.intro-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.intro-card-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+}
+
+/* =========================================
+   SECTION HOẠT ĐỘNG (FACEBOOK EMBED GRID)
+   ========================================= */
+.activity-section {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.facebook-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.fb-embed-slot {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 1rem;
+    transition: box-shadow 0.3s ease;
+}
+
+.fb-embed-slot:hover {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+/* Bảo vệ iframe Facebook nhúng vào slot */
+.fb-embed-slot iframe {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    border-radius: 12px;
+    border: none;
+}
+
+/* =========================================
+   RESPONSIVE MEDIA QUERIES
+   ========================================= */
+
+/* ---- Tablet (≤ 1024px) ---- */
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 0.6rem 1rem;
+    }
+    .nav-link {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.5rem;
+    }
+    .nav-title {
+        font-size: 0.95rem;
+    }
+}
+
+/* ---- Mobile (≤ 768px) ---- */
+@media (max-width: 768px) {
+    /* Ẩn 2 dòng text branding trên mobile, chỉ giữ logo tròn */
+    .brand-text {
+        display: none;
+    }
+
+    .navbar {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 0.6rem 1rem;
+    }
+
+    .nav-center {
+        order: 3; /* Đẩy menu xuống dòng riêng trên mobile */
+        width: 100%;
+        justify-content: center;
+        gap: 0.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        padding-top: 0.5rem;
+    }
+
+    .nav-link {
+        font-size: 0.78rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    /* Intro cards chuyển từ ngang sang dọc */
+    .intro-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .intro-card-image {
+        flex: 0 0 auto;
+        max-width: 160px;
+    }
+
+    .intro-card-content h3 {
+        justify-content: center;
+    }
+
+    /* Section padding thu gọn */
+    .campaign-section {
+        padding: 2rem 0;
+    }
+
+    .section-heading {
+        font-size: 1.8rem;
+    }
+}

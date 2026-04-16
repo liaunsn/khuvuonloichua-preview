@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khu Vườn Lời Chúa - Tiếp Bước</title>
+    <!-- CSS Tùy chỉnh -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Nguồn Font hiện đại cho UI (Outfit & Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Thư viện Canvas Confetti (Hiệu ứng Pháo giấy) - Siêu nhẹ, không Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <div class="particles-bg" id="particles-bg"></div>
+
+    <!-- =============================================
+         NAVBAR DÍNH (STICKY GLASSMORPHISM DASHBOARD)
+         ============================================= -->
+    <nav id="top-nav" class="navbar">
+        <div class="nav-left">
+            <span class="nav-title">KHU VƯỜN LỜI CHÚA</span>
+        </div>
+        <div class="nav-center">
+            <a href="#cay-loi-chua" class="nav-link">Cây Lời Chúa</a>
+            <a href="#gioi-thieu" class="nav-link">Giới Thiệu Các Nhóm</a>
+            <a href="#hoat-dong" class="nav-link">Hoạt Động Chính</a>
+        </div>
+        <div class="nav-right">
+            <img src="logo.png" alt="Logo Sa Mạc" class="nav-logo">
+            <div class="brand-text">
+                <span>Sa mạc Thực hành Dự Trưởng - Tiếp Bước 8</span>
+                <span>Lời Nảy Mầm Trên Đất Quê Hương</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- =============================================
+         SECTION 1: CÂY LỜI CHÚA (Nội dung gốc)
+         ============================================= -->
+    <section id="cay-loi-chua" class="campaign-section">
+        <header class="header">
+            <h1>Khám Phá Khu Vườn Lời Chúa</h1>
+            <p>Hành trình tiếp bước của 3 đội thi đua: Pistis, Elpis và Agape</p>
+        </header>
+
+        <main class="tree-container">
+            <!-- Đội PISTIS -->
+            <section class="team-card team-pistis" id="card-pistis">
+                <h2 class="team-name">Pistis</h2>
+                <div class="tree-wrapper" id="tree-pistis">
+                    <!-- Cây base sẽ được render bởi JS -->
+                    <img class="base-tree" src="seed_pistis.png" alt="Cây đội Pistis">
+                </div>
+                
+                <div class="progress-section">
+                    <div class="progress-header">
+                        <span class="team-label">Mục tiêu đơm hoa kết trái</span>
+                        <span class="video-count"><strong id="count-pistis">0</strong> / 30 Video</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progress-pistis">
+                            <div class="glow-tip"></div>
+                        </div>
+                        <!-- Các mốc đánh dấu milestone -->
+                        <div class="marker" style="left: 33.33%;"><span>10</span></div>
+                        <div class="marker" style="left: 66.66%;"><span>20</span></div>
+                        <div class="marker" style="left: 100%;"><span>30</span></div>
+                    </div>
+                </div>
+
+                <div class="video-embed">
+                    <h3>Video Tiêu Biểu</h3>
+                    <div class="placeholder-embed">
+                        <!-- ADMIN SETUP: Dán iframe TikTok của Pistis vào đây -->
+                        <span>Chưa có mã nhúng TikTok<br><small>(Dán iframe vào source code)</small></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Đội ELPIS -->
+            <section class="team-card team-elpis" id="card-elpis">
+                <h2 class="team-name">Elpis</h2>
+                <div class="tree-wrapper" id="tree-elpis">
+                    <img class="base-tree" src="seed_elpis.png" alt="Cây đội Elpis">
+                </div>
+                
+                <div class="progress-section">
+                    <div class="progress-header">
+                        <span class="team-label">Mục tiêu đơm hoa kết trái</span>
+                        <span class="video-count"><strong id="count-elpis">0</strong> / 30 Video</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progress-elpis">
+                            <div class="glow-tip"></div>
+                        </div>
+                        <div class="marker" style="left: 33.33%;"><span>10</span></div>
+                        <div class="marker" style="left: 66.66%;"><span>20</span></div>
+                        <div class="marker" style="left: 100%;"><span>30</span></div>
+                    </div>
+                </div>
+
+                <div class="video-embed">
+                    <h3>Video Tiêu Biểu</h3>
+                    <div class="placeholder-embed">
+                        <!-- ADMIN SETUP: Dán iframe TikTok của Elpis vào đây -->
+                        <span>Chưa có mã nhúng TikTok<br><small>(Dán iframe vào source code)</small></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Đội AGAPE -->
+            <section class="team-card team-agape" id="card-agape">
+                <h2 class="team-name">Agape</h2>
+                <div class="tree-wrapper" id="tree-agape">
+                    <img class="base-tree" src="seed_agape.png" alt="Cây đội Agape">
+                </div>
+                
+                <div class="progress-section">
+                    <div class="progress-header">
+                        <span class="team-label">Mục tiêu đơm hoa kết trái</span>
+                        <span class="video-count"><strong id="count-agape">0</strong> / 30 Video</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progress-agape">
+                            <div class="glow-tip"></div>
+                        </div>
+                        <div class="marker" style="left: 33.33%;"><span>10</span></div>
+                        <div class="marker" style="left: 66.66%;"><span>20</span></div>
+                        <div class="marker" style="left: 100%;"><span>30</span></div>
+                    </div>
+                </div>
+
+                <div class="video-embed">
+                    <h3>Video Tiêu Biểu</h3>
+                    <div class="placeholder-embed">
+                        <!-- ADMIN SETUP: Dán iframe TikTok của Agape vào đây -->
+                        <span>Chưa có mã nhúng TikTok<br><small>(Dán iframe vào source code)</small></span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </section>
+
+    <!-- =============================================
+         SECTION 2: GIỚI THIỆU CÁC NHÓM
+         ============================================= -->
+    <section id="gioi-thieu" class="campaign-section intro-section">
+        <h2 class="section-heading">Giới Thiệu Các Nhóm</h2>
+        <p class="section-subheading">Ba đội thi đua, một hành trình gieo Lời trên đất quê hương</p>
+
+        <div class="intro-cards-wrapper">
+            <!-- CARD PISTIS -->
+            <article class="intro-card intro-card-pistis">
+                <div class="intro-card-image">
+                    <img src="sapling_pistis.png" alt="Đội Pistis">
+                </div>
+                <div class="intro-card-content">
+                    <h3>Nhóm Pistis <span class="intro-badge" style="background: var(--color-pistis);">Đức Tin</span></h3>
+                    <p>Pistis – đội mang tinh thần Đức Tin vững vàng. Các thành viên của Pistis luôn dấn thân tiên phong, mang Lời Chúa đến với mọi người qua những video sáng tạo và đầy cảm hứng trên nền tảng TikTok.</p>
+                </div>
+            </article>
+
+            <!-- CARD ELPIS -->
+            <article class="intro-card intro-card-elpis">
+                <div class="intro-card-image">
+                    <img src="sapling_elpis.png" alt="Đội Elpis">
+                </div>
+                <div class="intro-card-content">
+                    <h3>Nhóm Elpis <span class="intro-badge" style="background: var(--color-elpis);">Đức Cậy</span></h3>
+                    <p>Elpis – đội tượng trưng cho Đức Cậy trông. Với niềm hy vọng bền bỉ, Elpis không ngừng sáng tạo nội dung truyền thông, lan tỏa thông điệp yêu thương và hy vọng qua từng video được đăng tải.</p>
+                </div>
+            </article>
+
+            <!-- CARD AGAPE -->
+            <article class="intro-card intro-card-agape">
+                <div class="intro-card-image">
+                    <img src="sapling_agape.png" alt="Đội Agape">
+                </div>
+                <div class="intro-card-content">
+                    <h3>Nhóm Agape <span class="intro-badge" style="background: var(--color-agape);">Đức Mến</span></h3>
+                    <p>Agape – đội mang lửa Đức Mến nồng nàn. Agape truyền tải tình yêu Thiên Chúa qua những câu chuyện chân thực, gần gũi, và đầy nhiệt huyết trên mỗi video TikTok của mình.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- =============================================
+         SECTION 3: HOẠT ĐỘNG CHÍNH (FACEBOOK EMBED)
+         ============================================= -->
+    <section id="hoat-dong" class="campaign-section activity-section">
+        <h2 class="section-heading">Hoạt Động Chính</h2>
+        <p class="section-subheading">Các bài viết nổi bật từ Fanpage chính thức</p>
+
+        <div class="facebook-grid">
+            <div class="fb-embed-slot">
+                <div class="placeholder-embed">
+                    <!-- ADMIN SETUP: Dán iframe Facebook Post #1 vào đây -->
+                    <span>Dán mã nhúng Facebook Post<br><small>(iframe từ Facebook)</small></span>
+                </div>
+            </div>
+            <div class="fb-embed-slot">
+                <div class="placeholder-embed">
+                    <!-- ADMIN SETUP: Dán iframe Facebook Post #2 vào đây -->
+                    <span>Dán mã nhúng Facebook Post<br><small>(iframe từ Facebook)</small></span>
+                </div>
+            </div>
+            <div class="fb-embed-slot">
+                <div class="placeholder-embed">
+                    <!-- ADMIN SETUP: Dán iframe Facebook Post #3 vào đây -->
+                    <span>Dán mã nhúng Facebook Post<br><small>(iframe từ Facebook)</small></span>
+                </div>
+            </div>
+            <div class="fb-embed-slot">
+                <div class="placeholder-embed">
+                    <!-- ADMIN SETUP: Dán iframe Facebook Post #4 vào đây -->
+                    <span>Dán mã nhúng Facebook Post<br><small>(iframe từ Facebook)</small></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JS tùy chỉnh -->
+    <script src="script.js"></script>
+</body>
+</html>

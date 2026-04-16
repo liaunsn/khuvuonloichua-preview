@@ -74,6 +74,7 @@ body {
     /* Hiệu ứng Text chuyển màu (Gradient) */
     background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0 10px 30px rgba(255,255,255,0.1);
     letter-spacing: -1px;
@@ -405,6 +406,7 @@ body {
     letter-spacing: 2px;
     background: linear-gradient(135deg, var(--color-pistis), var(--color-elpis), var(--color-agape));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -487,6 +489,7 @@ body {
     margin-bottom: 0.8rem;
     background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -0.5px;
 }

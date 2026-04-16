@@ -66,7 +66,7 @@ body {
 }
 
 .header h1 {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 800;
     line-height: 1.2;
@@ -137,7 +137,7 @@ body {
 
 /* Chữ Đội (Team Name) */
 .team-name {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 2.5rem;
     font-weight: 800;
     margin-bottom: 2rem;
@@ -251,7 +251,7 @@ body {
 }
 .video-count strong {
     font-size: 1.2rem;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 .progress-bar-container {
@@ -309,7 +309,7 @@ body {
     font-size: 0.75rem;
     font-weight: 600;
     color: rgba(255,255,255,0.4);
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
 }
 
 /* Highlight điểm mốc cuối cùng (30) */
@@ -399,7 +399,7 @@ body {
 }
 
 .nav-title {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 1.1rem;
     font-weight: 800;
     letter-spacing: 2px;
@@ -440,8 +440,8 @@ body {
 }
 
 .nav-logo {
-    width: 44px;
-    height: 44px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid rgba(255, 255, 255, 0.15);
@@ -480,7 +480,7 @@ body {
 
 /* Heading & Subheading chung cho các section mới */
 .section-heading {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 800;
     text-align: center;
@@ -558,7 +558,7 @@ body {
 }
 
 .intro-card-content h3 {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 1.6rem;
     font-weight: 700;
     margin-bottom: 0.8rem;
@@ -612,12 +612,22 @@ body {
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
 }
 
+/* Slot có iframe thực (Facebook embed) → nền trắng để chữ đen dễ đọc */
+.fb-embed-slot:has(iframe) {
+    background: #ffffff;
+    border: none;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
 /* Bảo vệ iframe Facebook nhúng vào slot */
 .fb-embed-slot iframe {
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 !important;
-    border-radius: 12px;
+    display: block;
+    border-radius: 0;
     border: none;
 }
 

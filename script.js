@@ -4,7 +4,7 @@ const CONSTANTS = {
     COLORS: {
         pistis: ['#3b82f6', '#93c5fd', '#ffffff'], // Blue variants for Confetti
         elpis: ['#22c55e', '#86efac', '#ffffff'],  // Green variants
-        agape: ['#ef4444', '#fca5a5', '#ffffff']   // Red variants
+        agape: ['#d4a017', '#f0d060', '#ffffff']   // Gold variants
     }
 };
 
